@@ -91,3 +91,46 @@ void MardinateConvertWGS84Coordinate(double wLatitude, double wLongitude, double
         *mLongitude = wLongitude + longitudeOffset;
     }
 }
+
+
+
+
+void MardinateAddOffset(double wLatitude, double wLongitude, double* mLatitude, double* mLongitude)
+{
+    if (IsOutOfMainlandChina(wLatitude, wLongitude))
+    {
+        if (mLatitude != 0)
+        {
+            *mLatitude = wLatitude;
+        }
+        
+        if (mLongitude != 0)
+        {
+            *mLongitude = wLongitude;
+        }
+        
+        return;
+    }
+    
+    double radLatitude = wLatitude / 180.0 * M_PI;
+    double magic = sin(radLatitude);
+    magic = 1 - kEE * magic * magic;
+    double sqrtMagic = sqrt(magic);
+    
+    if (mLatitude != 0)
+    {
+        double latitudeOffset = CalcLatitudeOffset(wLongitude - 105.0, wLatitude - 35.0);
+        latitudeOffset = (latitudeOffset * 180.0) / ((kA * (1 - kEE)) / (magic * sqrtMagic) * M_PI);
+        *mLatitude = wLatitude - latitudeOffset;
+    }
+    
+    if (mLongitude != 0)
+    {
+        double longitudeOffset = CalcLongitudeOffset(wLongitude - 105.0, wLatitude - 35.0);
+        longitudeOffset = (longitudeOffset * 180.0) / (kA / sqrtMagic * cos(radLatitude) * M_PI);
+        *mLongitude = wLongitude - longitudeOffset;
+    }
+}
+
+
+

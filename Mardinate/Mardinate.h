@@ -8,6 +8,8 @@ extern "C"
 
 void MardinateConvertWGS84Coordinate(double wLatitude, double wLongitude, double* mLatitude, double* mLongitude);
 
+void MardinateAddOffset(double wLatitude, double wLongitude, double* mLatitude, double* mLongitude);
+
 #if __cplusplus
 }
 #endif
