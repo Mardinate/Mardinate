@@ -27,4 +27,15 @@
                                         timestamp:location.timestamp];
 }
 
+
++ (CLLocationCoordinate2D)addOffset:(CLLocationCoordinate2D)coordinate
+{
+    double offsetLat;
+    double offsetLong;
+    
+    MardinateAddOffset(coordinate.latitude, coordinate.longitude, &offsetLat, &offsetLong);
+    return CLLocationCoordinate2DMake(offsetLat, offsetLong);
+}
+
+
 @end

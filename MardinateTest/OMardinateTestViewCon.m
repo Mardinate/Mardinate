@@ -55,6 +55,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+   
+    [_locationManager requestWhenInUseAuthorization];
     [_locationManager startUpdatingLocation];
     _mapView.showsUserLocation = YES;
 }

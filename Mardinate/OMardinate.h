@@ -13,4 +13,6 @@
 + (CLLocationCoordinate2D)convertWGS84Coordinate:(CLLocationCoordinate2D)coordinate;
 + (CLLocation*)convertWGS84Location:(CLLocation*)location;
 
++ (CLLocationCoordinate2D)addOffset:(CLLocationCoordinate2D)coordinate;
+
 @end
